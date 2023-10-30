@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\BrandsController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
+use App\Http\Controllers\admin\ShippingChargesController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\categoryController;
 use App\Http\Controllers\Admin\TempImagesController;
 use App\Http\Controllers\shopController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -37,16 +39,37 @@ Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCa
 Route::post('/update-cart', [CartController::class, 'updateCart'])->name('updateCart'); // Product Update-cart.
 Route::post('/delete-cart', [CartController::class, 'destroyCart'])->name('deleteCart'); // Delete-cart.
 Route::get('/cart', [CartController::class, 'cart'])->name('cart'); // Product Cart Page.
-Route::get('/login', [Controller::class, 'login'])->name('user.login'); // create.
-Route::post('/login', [Controller::class, 'store'])->name('user.store'); // store.
-Route::get('/register', [Controller::class, 'register'])->name('user.register');
 
+// ==== Frontend Middleware ====.
+
+Route::group(['prefix' => '/user'], function () {
+
+    Route::group(['middleware' => 'guest'], function () {
+
+        Route::get('/login', [UserController::class, 'login'])->name('user.login'); // create.
+        Route::post('/login', [UserController::class, 'store'])->name('user.store'); // store.
+        Route::get('/register', [UserController::class, 'register'])->name('user.register.create'); // create.
+        Route::post('/register', [UserController::class, 'processRegister'])->name('user.register'); // store.
+    });
+
+    Route::group(['middleware' => 'auth'], function () {
+
+        Route::get('/checkout', [CartController::class, 'create'])->name('checkout.create');
+        Route::post('/checkout', [CartController::class, 'store'])->name('checkout.store');
+        Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
+        Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+    });
+
+});
 
 // ==== End =====
 
+// ==== Frontend End ====
+
+
 // ==================================== Admin ====================================================
 
-// ==== Dashboard ====.
+// ==== Admin Middleware ====.
 
 Route::group(['prefix' => '/admin'], function() {
 
@@ -66,6 +89,7 @@ Route::group(['prefix' => '/admin'], function() {
 
 });
 
+// ==== End ====.
 
 
 Route::group(['prefix' => '/category'], function () {
@@ -86,16 +110,13 @@ $slug = '';
     if (!empty($request->title)) {
 
         $slug = Str::slug($request->title);
-
     }
-
         return response()->json([
             'status' => true,
             'slug' => $slug
         ]);
 
     })->name('getSlug');
-
 });
 
 
@@ -141,17 +162,24 @@ Route::group(['prefix' => '/products'], function () {
 
 });
 
-
 // ProductImages.
-//    Route::post('/products-images/update', [ProductImageController::class, 'update'])->name('product-images.update');
 Route::post('/products-images/update/{product_id}', [ProductImageController::class, 'update'])->name('product-images.update');
 Route::delete('/products-images', [ProductImageController::class, 'destroy'])->name('product-images.delete');
 // End.
+
+Route::group(['prefix' => '/shipping'], function() {
+
+    Route::get('/', [ShippingChargesController::class, 'index'])->name('shipping.index');
+    Route::get('/list', [ShippingChargesController::class, 'list'])->name('shipping.list');
+    Route::post('/', [ShippingChargesController::class, 'store'])->name('shipping.store');
+    Route::get('/edit/{id}', [ShippingChargesController::class, 'edit'])->name('shipping.edit');
+    Route::put('/update/{id}', [ShippingChargesController::class, 'update'])->name('shipping.update');
+    Route::delete('/delete/{id}', [ShippingChargesController::class, 'destroy'])->name('shipping.delete');
+
+});
 
 
 // ==== End ====.
 
 
 // ==================================== Admin End =================================================
-
-

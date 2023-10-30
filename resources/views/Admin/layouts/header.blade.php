@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{ url('Admin/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{ url('Admin/assets/vendor/charts/c3charts/c3.css')}}">
     <link rel="stylesheet" href="{{ url('Admin/assets/vendor/fonts/flag-icon-css/flag-icon.min.css')}}">
+    {{-- Icon. --}}
+    <link rel="shortcut icon" href="{{ url('frontend/img/favicon.png')}}">
     {{-- Drop Zone Js lib --}}
     <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 

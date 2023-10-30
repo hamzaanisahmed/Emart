@@ -11,6 +11,7 @@
     <link href="{{ url('Admin/assets/vendor/fonts/circular-std/style.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('Admin/assets/libs/css/style.css')}}">
     <link rel="stylesheet" href="{{ url('Admin/assets/vendor/fonts/fontawesome/css/fontawesome-all.css')}}">
+    <link rel="shortcut icon" href="{{ url('frontend/img/favicon.png')}}">
     <style>
     html,
     body {
@@ -36,7 +37,7 @@
         <div class="card ">
             <div class="card-header text-center">
                 <a href="{{ route('home') }}">
-                    <img class="logo-img" src="{{ url('Admin/assets/images/emart.png')}}" style="width: 140px;" alt="logo">
+                    <img class="logo-img" src="{{ url('frontend/img/favicon.png')}}" style="width: 70px;" alt="logo">
                 </a>
                 <span class="splash-description">Please enter your admin information.</span>
             </div>

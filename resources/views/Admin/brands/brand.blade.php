@@ -41,9 +41,9 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 
-  {{-- End- Add Brands Modal --}}
+{{-- End- Add Brands Modal --}}
 
 
   {{-- Edit & Update Brands Modal --}}

@@ -296,7 +296,7 @@
                         $("input[type='text'], select, input[type='number']").removeClass('is-invalid');
 
                         // Success alert.
-                        swal("Good job!", "Product Added Successfully!", "success");
+                        // swal("Good job!", "Product Added Successfully!", "success");
 
                         // Reset Summernote field
                         $('.summernote').summernote('reset');
@@ -315,6 +315,8 @@
                             success: function (data) {
 
                                 $('body').html(data);
+                                swal("Good job!", "Product Added Successfully!", "success");
+
                                 // $('#preloader').addClass('d-none'); // hide preloader.
 
                             }

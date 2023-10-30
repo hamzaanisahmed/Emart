@@ -78,7 +78,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('product.list') }}"><i class="fas fa-fw fa-table"></i>Products</a>
                             </li>
-                            <li class="nav-divider">
+                            {{-- <li class="nav-divider">
                                 Features
                             </li>
                             <li class="nav-item">
@@ -129,11 +129,11 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-fw fa-inbox"></i>Apps <span class="badge badge-secondary">New</span></a>
+                                <a class="nav-link" href="{{ route('shipping.index') }}"><i class="fas fa-fw fa-inbox"></i>Shipping <span class="badge badge-secondary">New</span></a>
                                 <div id="submenu-7" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
+                                    {{-- <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Inbox</a>
                                         </li>
@@ -146,7 +146,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Message Chat</a>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                             </li>
                             <li class="nav-item">

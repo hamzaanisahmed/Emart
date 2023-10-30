@@ -63,11 +63,12 @@
 
                 </ul>
               <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('cart') }}"> <i class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small class="text-gray fw-normal"> ( {{ Cart::count() }} ) </small></a></li>
-                <li class="nav-item"><a class="nav-link" href="#!"> <i class="far fa-heart me-1"></i><small class="text-gray fw-normal"> (0)</small></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('cart') }}"> <i class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small class="text-dark fw-bold"> ( {{ Cart::count() }} ) </small></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('user.profile') }}"> <i class="far fa-heart me-1"></i><small class="text-gray fw-normal"> (0)</small></a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('user.login') }}">
 
                    <i class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li>
+
               </ul>
             </div>
           </nav>

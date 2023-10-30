@@ -49,7 +49,7 @@
                                     @endforeach
                                     @endif
                                 </select>
-                                <p class="p" ></p>
+                                <p class="p"></p>
                             </div>
                         </div>
                         <br>

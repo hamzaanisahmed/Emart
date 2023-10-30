@@ -18,7 +18,6 @@ function deleteImage(id) {
             if(response.status == true) {
 
                 // $('#image-' + id).remove();
-
                 alert(response.message);
 
             } else {
@@ -285,7 +284,7 @@ function deleteImage(id) {
                 <div class="pb-5 pt-4">
                     <button type="reset" class="btn btn-secondary">Cancel</button>
                     &nbsp;
-                    <button class="btn btn-primary createProductBtn">Submit</button>
+                    <button class="btn btn-primary createProductBtn">Update Changes</button>
                 </div>
             </div>
             </form>
@@ -397,21 +396,9 @@ function deleteImage(id) {
 
                     if (response['status'] == true) {
 
-                        // Reset the Form Fields
-                        // $("#createProductForm")[0].reset();
-
                         // Reset Validations.
                         $(".p").removeClass('invalid-feedback').html('');
                         $("input[type='text'], select, input[type='number']").removeClass('is-invalid');
-
-                        // Success alert.
-                        swal("Good job!", "Product Updated Successfully!", "success");
-
-                        // Reset Summernote field
-                        // $('.summernote').summernote('reset');
-
-                        // Reset Dropzone.
-                        // Dropzone.forElement("#image").removeAllFiles(true);
 
                         // Redirect To List Page.
                         // $('#preloader').removeClass('d-none'); // Show preloader.
@@ -424,6 +411,7 @@ function deleteImage(id) {
                             success: function (data) {
 
                                 $('body').html(data);
+                                swal("Good job!", "Product Updated Successfully!", "success");
                                 // $('#preloader').addClass('d-none'); // hide preloader.
 
                             }
