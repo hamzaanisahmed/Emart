@@ -75,12 +75,12 @@
                     <span class="p"></span>
                   </div>
                   <div class="col-lg-6">
-                    <label class="form-label text-sm text-uppercase" for="city">Town/City </label>
+                    <label class="form-label text-sm text-uppercase" for="city">City </label>
                     <input class="form-control form-control-lg" type="text" name="city" id="city" placeholder="Town/City" value="{{ (!empty($customerAddress)) ? $customerAddress->city : '' }}">
                     <span class="p"></span>
                   </div>
                   <div class="col-lg-6">
-                    <label class="form-label text-sm text-uppercase" for="state">State/County </label>
+                    <label class="form-label text-sm text-uppercase" for="state">State </label>
                     <input class="form-control form-control-lg" type="text" name="state" id="state" placeholder="State" value="{{ (!empty($customerAddress)) ? $customerAddress->state : '' }}">
                     <span class="p"></span>
                   </div>
@@ -99,10 +99,10 @@
                     <li class="d-flex align-items-center justify-content-between mb-3"><strong class="small fw-normal">{{ $item->name }} x {{ $item->qty }}</strong><span class="text-muted small fw-bold">Rs. {{ $item->price }}</span></li>
                     @endforeach
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">SubTotal</strong><span class="fw-bold">{{ Cart::subtotal() }}</span></li>
-                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">Shipping Charges</strong><span class="fw-bold">Rs. {{ number_format($totalShippingCharge, 2) }}</span></li>
+                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">SubTotal</strong><span class="fw-bold text-muted">{{ Cart::subtotal() }}</span></li>
+                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">Shipping Charges</strong><span class="fw-bold text-muted">{{ number_format($totalShippingCharge) }}</span></li>
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Total</strong><span class="fw-bold">Rs. {{ number_format($grandTotal, 2) }}</span></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Total</strong><span class="fw-bold">Rs. {{ number_format($grandTotal) }}</span></li>
                   </ul>
                 </div>
               </div>
@@ -116,7 +116,7 @@
                             <input type="radio" name="payment_method" id="payment_method_one" value="cod" checked><span class="fw-bold"> Cash on Delivery </span>
                         </div>
                         <div class="form-group mb-4">
-                            <input type="radio" name="payment_method" id="payment_method_two" value="cod"><span class="fw-bold"> Stripe </span>
+                            <input type="radio" name="payment_method" id="payment_method_two" value="stripe"><span class="fw-bold"> Stripe </span>
                         </div>
                         <div class="form-group mb-0 d-none" id="stripeForm">
                         <h5 class="text-uppercase mb-3">Payment Details</h5>
@@ -169,14 +169,12 @@
 
     });
 
-
     $("#userCheckoutForm").submit(function(event) {
 
         event.preventDefault();
         let formData = $(this).serializeArray();
 
         $("button[type=submit]").prop('disabled', true);
-
 
         $.ajax({
             type: "POST",
@@ -217,9 +215,6 @@
 
         });
     });
-
-
-
 
 </script>
 @endsection

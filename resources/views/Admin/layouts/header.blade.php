@@ -19,18 +19,15 @@
     <link rel="shortcut icon" href="{{ url('frontend/img/favicon.png')}}">
     {{-- Drop Zone Js lib --}}
     <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
-
     {{-- Sweet Alert Cdn --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
     integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     {{-- Summernote --}}
     <link rel="stylesheet" href="{{ url('Admin/assets/vendor/summernote/summernote.min.css')}}">
-
     {{-- Select to --}}
     <link rel="stylesheet" href="{{ url('Admin/assets/vendor/select2/css/select2.min.css')}}">
-
-
+    {{-- Date-Picker --}}
+    <link rel="stylesheet" href="{{ url('Admin/assets/libs/css/datetimepicker.css')}}">
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Panel</title>
@@ -40,7 +37,8 @@
     <!-- ============================================================== -->
     <!-- main wrapper -->
     <!-- ============================================================== -->
-    <div class="dashboard-main-wrapper" id="check-font">
+    <div class="dashboard-main-wrapper">
+        {{-- id="check-font"   --}}
         <!-- ============================================================== -->
         <!-- navbar -->
         <!-- ============================================================== -->
@@ -50,7 +48,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">

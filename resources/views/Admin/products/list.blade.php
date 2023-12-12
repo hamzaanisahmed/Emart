@@ -74,7 +74,6 @@
                                             @else
                                             <img src="{{ url('uploads/products/small/constant/default-150x150.png') }}" class="img-thumbnail" width="270">
                                             @endif
-
                                         </td>
                                         <td>{{ $product->title }}</td>
                                         <td>{{ $product->slug }}</td>
@@ -84,7 +83,6 @@
                                             @else
                                             Not Found
                                             @endif
-
                                         </td>
                                         <td>
                                             @if ($product->brand_id)

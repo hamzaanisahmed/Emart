@@ -20,7 +20,7 @@
                                 </div> --}}
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('category.create') }}"><i class="fa fa-fw fa-rocket"></i>Category</a>
+                                <a class="nav-link" href="{{ route('category.list') }}"><i class="fa fa-fw fa-rocket"></i>Category</a>
                                 {{-- <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -46,7 +46,7 @@
                                 </div> --}}
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('sub-category.create') }}"><i class="fas fa-fw fa-chart-pie"></i>Sub Category</a>
+                                <a class="nav-link" href="{{ route('sub-category.list') }}"><i class="fas fa-fw fa-chart-pie"></i>Sub Category</a>
                                 {{-- <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -150,29 +150,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i class="fas fa-fw fa-columns"></i>Icons</a>
-                                <div id="submenu-8" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">FontAwesome Icons</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Material Icons</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Simpleline Icon</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Themify Icon</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Flag Icons</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Weather Icon</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <a class="nav-link" href="{{ route('adminOrders') }}"><i class="fas fa-fw fa-columns"></i>Orders</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class="fas fa-fw fa-map-marker-alt"></i>Maps</a>

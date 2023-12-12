@@ -164,7 +164,6 @@
                                     <label for="category">Category</label>
                                     <select name="category" id="category" class="form-control">
                                         <option value="">Select a Category</option>
-
                                         @if ($categories->isNotEmpty())
                                         @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -229,8 +228,6 @@
                 </div>
             </div>
             </form>
-
-
         </div>
     </div>
 @endsection
@@ -436,7 +433,7 @@
 
         // backButton click event.
         $(document).on('click', '#backButton', function() {
-
+            
             $('#preloader').removeClass('d-none'); // Show preloader.
 
             var newUrl = '/products/'; // Get the new URL.

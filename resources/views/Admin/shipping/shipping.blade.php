@@ -19,7 +19,6 @@
                     @foreach($countries as $country)
                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                     @endforeach
-                    <option value="rest_of_world">Rest of the world</option>
                 </select>
                 <p class="p"></p>
             </div>
@@ -202,11 +201,6 @@
 
                             }
                         });
-
-                        // if (shipping.country_id == 'rest_of_world') {
-                        //     selectedCountryName = 'Rest Of The World';
-                        // }
-
 
                         $("tbody").append(
                             '<tr>\

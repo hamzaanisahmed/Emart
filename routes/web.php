@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\BrandsController;
+use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
@@ -56,6 +57,8 @@ Route::group(['prefix' => '/user'], function () {
 
         Route::get('/checkout', [CartController::class, 'create'])->name('checkout.create');
         Route::post('/checkout', [CartController::class, 'store'])->name('checkout.store');
+        Route::get('/orders', [UserController::class, 'orders'])->name('userOrders');
+        Route::get('/orderDetails/{id}', [UserController::class, 'orderDetails'])->name('userOrderDetails');
         Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
         Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
     });
@@ -83,6 +86,12 @@ Route::group(['prefix' => '/admin'], function() {
     Route::group(['middleware' => 'admin.auth'], function() {
 
         Route::get('/panel', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+        // Orders.
+        Route::get('/orders', [OrdersController::class, 'index'])->name('adminOrders'); //List.
+        Route::get('/orders/{id}', [OrdersController::class, 'detail'])->name('adminOrdersId');
+        Route::post('/orderStatus/{id}', [OrdersController::class, 'orderStatus'])->name('orderStatusId');
+
         Route::get('/logout', [DashboardController::class, 'logout'])->name('admin.logout');
 
     });
@@ -100,7 +109,6 @@ Route::get('/list',[categoryController::class, 'list'])->name('category.list');
 Route::get('/edit/{id}', [categoryController::class, 'edit'])->name('category.edit');
 Route::put('/update/{id}', [categoryController::class, 'update'])->name('category.update');
 Route::delete('/delete/{id}', [categoryController::class, 'destroy'])->name('category.delete');
-
 
 // Generated Slug.
 Route::get('/getSlug', function (Request $request) {

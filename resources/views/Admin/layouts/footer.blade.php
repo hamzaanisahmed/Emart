@@ -55,28 +55,31 @@
     <script src="{{ url('Admin/assets/vendor/summernote/summernote.min.js')}}"></script>
     {{-- Select to --}}
     <script src="{{ url('Admin/assets/vendor/select2/js/select2.min.js')}}"></script>
-
-
+    {{-- Date-Picker --}}
+    <script src="{{ url('Admin/assets/libs/js/datetimepicker.js')}}"></script>
     {{-- Added Permanently Csrf Token --}}
-
     <script type="text/javascript">
 
+    //Csrf-Token.
     $.ajaxSetup({
-
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-
+    //Summernote.
     $(document).ready(function() {
-
         $(".summernote").summernote({
            height:270
         });
-
     });
 
+
+    //Date-Picker.
+    $('#shipped_date').datetimepicker({
+        // options here
+        format:'Y-m-d H:i:s',
+    });
 
     </script>
 

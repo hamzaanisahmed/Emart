@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use App\Models\CustomerAddress;
 use App\Models\orderItems;
 use App\Models\orders;
 use App\Models\Product;
@@ -169,15 +168,7 @@ class CartController extends Controller
             $totalQty += $item->qty;
         }
 
-        // $totalShippingCharge = $totalQty*$shippingInfo->amount;
-
-        if ($shippingInfo !== null) {
-            $totalShippingCharge = $shippingInfo->amount;
-
-        } else {
-            $totalShippingCharge = 150;
-        }
-
+        $totalShippingCharge = $shippingInfo->amount;
         $grandTotal = Cart::subtotal('2','.','')+$totalShippingCharge;
 
         $data['countries'] = $countries;
@@ -197,7 +188,7 @@ class CartController extends Controller
             'firstName' => 'required',
              'lastName' => 'required',
              'email' => 'required|email',
-             'phone' => 'required',
+             'phone' => 'required|max:11',
              'country' => 'required',
              'address' => 'required',
              'apartment' => 'required',
@@ -207,61 +198,45 @@ class CartController extends Controller
         ]);
 
         if ($validator->passes()) {
-
             $user = Auth::user();
-
-            // CustomerAddress::updateOrCreate(
-
-            //     ['user_id' => $user->id ],
-
-            //     [
-            //         // store address in ordersTable
-            //         'user_id' => $user->id,
-            //         'first_name' => $request->firstName,
-            //         'last_name' => $request->lastName,
-            //         'email' => $request->email,
-            //         'phone' => $request->phone,
-            //         'company' => $request->company,
-            //         'country' => $request->country,
-            //         'address' => $request->address,
-            //         'apartment' => $request->apartment,
-            //         'city' => $request->city,
-            //         'state' => $request->state,
-            //     ]
-
-            //     );
-
+            
             $shipping = 0;
             $discount = 0;
             $subTotal = Cart::subtotal(2, '.', '');
-            $grand_total = $subTotal+$shipping;
 
-            $orders = new orders;
-            $orders->subtotal = $subTotal;
-            $orders->shipping = $shipping;
-            $orders->grand_total = $grand_total;
-
-            $orders->user_id = $user->id;
-            $orders->first_name = $request->firstName;
-            $orders->last_name = $request->lastName;
-            $orders->email = $request->email;
-            $orders->phone = $request->phone;
-            $orders->company = $request->company;
-            $orders->country_id = $request->country;
-            $orders->address = $request->address;
-            $orders->apartment = $request->apartment;
-            $orders->city = $request->city;
-            $orders->state = $request->state;
-            $orders->save();
-
-            // store product.
+            $shippingInfo = ShippingCharges::where('country_id', $request->country)->first();
+            $totalQty = 0;
+    
+            foreach (Cart::content() as $item) {
+                $totalQty += $item->qty;
+            }
+    
+            $shipping = $shippingInfo->amount;
+            $grandTotal = $subTotal+$shipping;
 
             if ($request->payment_method == 'cod') {
 
-                $shipping = 0;
-                $discount = 0;
-                $subTotal = Cart::subtotal(2, '.', '');
+                $orders = new orders;
+                $orders->subtotal = $subTotal;
+                $orders->shipping = $shipping;
+                $orders->grand_total = $grandTotal;
+                $orders->payment_status = 'unpaid';
+                $orders->status = 'pending';
+    
+                $orders->user_id = $user->id;
+                $orders->first_name = $request->firstName;
+                $orders->last_name = $request->lastName;
+                $orders->email = $request->email;
+                $orders->phone = $request->phone;
+                $orders->company = $request->company;
+                $orders->country_id = $request->country;
+                $orders->address = $request->address;
+                $orders->apartment = $request->apartment;
+                $orders->city = $request->city;
+                $orders->state = $request->state;
+                $orders->save();
 
+                //store order Item.
                 foreach(Cart::content() as $item) {
 
                     $orderItems = new orderItems;
@@ -272,11 +247,7 @@ class CartController extends Controller
                     $orderItems->price = $item->price;
                     $orderItems->total = $item->price*$item->qty;
                     $orderItems->save();
-
                 }
-
-            } else {
-                //
             }
 
             Cart::destroy();

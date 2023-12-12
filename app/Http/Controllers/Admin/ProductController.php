@@ -25,7 +25,7 @@ class ProductController extends Controller
 
         $data['categories'] = $categories;
         $data['brands'] = $brands;
-        
+
         return view('Admin.products.create', $data);
     }
 
