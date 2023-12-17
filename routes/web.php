@@ -71,10 +71,9 @@ Route::group(['prefix' => '/user'], function () {
 
         // Logout.
         Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
-    });
 
+    });
 });
-// End. 
 
 // End Frontend.
 
@@ -177,8 +176,7 @@ Route::group(['prefix' => '/admin'], function() {
             ]);
         })->name('getSlug');
 
-    });
-
-});
+    }); // End Admin Middleware Routes.
+}); // End Admin Routes.
 
 // End Admins.
