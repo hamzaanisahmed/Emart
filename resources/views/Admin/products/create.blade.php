@@ -312,7 +312,7 @@
                             success: function (data) {
 
                                 $('body').html(data);
-                                swal("Good job!", "Product Added Successfully!", "success");
+                                swal("", "Product Has Been Created Successfully!", "success");
 
                                 // $('#preloader').addClass('d-none'); // hide preloader.
 
@@ -435,9 +435,7 @@
         $(document).on('click', '#backButton', function() {
             
             $('#preloader').removeClass('d-none'); // Show preloader.
-
-            var newUrl = '/products/'; // Get the new URL.
-
+            var newUrl = '{{ route("product.list") }}'; // Get the new URL.
             window.history.pushState('', '', newUrl); // Change the URL without refreshing the page.
             loadContent(newUrl);
 

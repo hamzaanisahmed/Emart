@@ -52,7 +52,7 @@
                         </div>
                       </th>
                       <td class="p-3 align-middle border-light">
-                        <p class="mb-0 small">Rs. {{ $product->price }}</p>
+                        <p class="mb-0 small">Rs. {{ number_format($product->price) }}</p>
                       </td>
                       <td class="p-3 align-middle border-light">
                         <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">QTY</span>
@@ -64,7 +64,7 @@
                         </div>
                       </td>
                       <td class="p-3 align-middle border-light">
-                        <p class="mb-0 small">Rs. {{ $product->price*$product->qty }}</p>
+                        <p class="mb-0 small" id="total">Rs. {{ number_format($product->price*$product->qty) }}</p>
                       </td>
                       <td class="p-3 align-middle border-light">
                         <a class="reset-anchor" onclick="destroyCart('{{ $product->rowId }}');">
@@ -89,21 +89,23 @@
             <div class="col-lg-4">
               <div class="card border-0 rounded-0 p-lg-4 bg-light">
                 <div class="card-body">
-                  <h5 class="text-uppercase mb-4">Cart total</h5>
+                  <h5 class="text-uppercase mb-4">Cart Summery</h5>
                   <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">Rs. {{ Cart::subtotal() }}</span></li>
+                    @foreach (Cart::content() as $item)
+                    <li class="d-flex align-items-center justify-content-between mb-3"><strong class="small fw-normal">{{ $item->name }} x {{ $item->qty }}</strong><span class="text-muted small fw-bold">Rs. {{ $item->price }}</span></li>
+                    @endforeach
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>Rs. {{ Cart::subtotal() }}</span></li>
-                    <li>
-                      <form action="#">
-                        <div class="input-group mb-0">
-                          <input class="form-control" type="text" placeholder="Enter your coupon">
-                          <button class="btn btn-dark btn-sm w-100" type="submit"> <i class="fas fa-gift me-2"></i>Apply coupon</button>
-                        </div>
-                      </form>
-                    </li>
+                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">SubTotal</strong><span class="fw-bold text-muted">{{ Cart::subtotal() }}</span></li>
+                    {{-- <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">Discount</strong><span class="fw-bold text-muted"></span></li>
+                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">Shipping Charges</strong><span class="fw-bold text-muted"></span></li>
+                    <li class="border-bottom my-2"></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Total</strong><span class="fw-bold">Rs. </span></li>
                   </ul>
                 </div>
+                <div class="input-group mb-0">
+                  <input class="form-control" type="text" placeholder="Enter your coupon">
+                  <button class="btn btn-dark btn-sm w-100" type="submit"> <i class="fas fa-gift me-2"></i>Apply coupon</button>
+                </div> --}}
               </div>
             </div>
           </div>
@@ -162,6 +164,7 @@ function updateCart(rowId,qty) {
         success: function (response) {
             if (response.status == true) {
                 location.reload();
+                // $("#total").html(response.total).val();
 
             } else {
                 alert(response.message);

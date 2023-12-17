@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\DiscountCoupons;
 use App\Models\orderItems;
 use App\Models\orders;
 use App\Models\Product;
 use App\Models\ShippingCharges;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -65,7 +67,6 @@ class CartController extends Controller
             'status' => $status,
             'message' => $message
         ]);
-
     }
 
     public function cart() {
@@ -76,7 +77,6 @@ class CartController extends Controller
 
         return view('frontend.cart', $data);
     }
-
 
     public function updateCart(Request $request) {
 
@@ -92,6 +92,7 @@ class CartController extends Controller
                 Cart::update($rowId, $qty); // Will update the quantity
 
                 $status = true;
+                // $total = Cart::update($rowId, $qty)->subtotal();
                 $message = 'Cart Updated Successfully';
 
             } else {
@@ -101,15 +102,12 @@ class CartController extends Controller
         }
 
         // Cart::update($rowId, $qty); // Will update the quantity
-
         return response()->json([
             'status' => $status,
+            // 'total' => Cart::update($rowId, $qty)->subtotal(),
             'message' => $message
         ]);
-
-
     }
-
 
     public function destroyCart(Request $request) {
 
@@ -125,18 +123,16 @@ class CartController extends Controller
         }
 
         Cart::remove($request->rowId);
-
         $message = 'Product remove from cart successfully';
 
         return response()->json([
             'status' => true,
             'message' => $message
         ]);
-
     }
 
-
     public function create() {
+        $discount = 0;
 
         if (Cart::count() == 0) {
             return redirect()->route('cart');
@@ -174,6 +170,7 @@ class CartController extends Controller
         $data['countries'] = $countries;
         $data['customerAddress'] = $customerAddress;
         $data['totalShippingCharge'] = $totalShippingCharge;
+        $data['discount'] = $discount;
         $data['grandTotal'] = $grandTotal;
 
         return view('frontend.checkout', $data);
@@ -184,7 +181,6 @@ class CartController extends Controller
     public function store(Request $request) {
 
         $validator = Validator::make($request->all(), [
-
             'firstName' => 'required',
              'lastName' => 'required',
              'email' => 'required|email',
@@ -194,12 +190,12 @@ class CartController extends Controller
              'apartment' => 'required',
              'city' => 'required',
              'state' => 'required'
-
         ]);
 
         if ($validator->passes()) {
+
             $user = Auth::user();
-            
+
             $shipping = 0;
             $discount = 0;
             $subTotal = Cart::subtotal(2, '.', '');
@@ -265,8 +261,46 @@ class CartController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
-
-
-
     }
+
+    public function applyDiscountCoupons(Request $request) {
+
+        $code = DiscountCoupons::where('code', $request->code)->first();
+        if($code == null) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid coupon code',
+            ]);
+        }
+
+        // Check if coupons start date & expire date is valid aur not.
+        $now = Carbon::now();
+
+        if ($code->starts_at != null) {
+            $startDate = Carbon::createFromFormat('Y-m-d H:i:s', $code->starts_at);
+
+            if ($now->lessThan($startDate)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Invalid discountCoupon code'
+                ]);
+            }
+        }
+
+        if ($code->expires_at != null) {
+            $expireDate = Carbon::createFromFormat('Y-m-d H:i:s', $code->expires_at);
+
+            if ($now->greaterThan($expireDate)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'The Coupon Code Is Expired'
+                ]);
+            }
+        }
+
+        session()->put('code', $code);
+    }
+
+
+
 }

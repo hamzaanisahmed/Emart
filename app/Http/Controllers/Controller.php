@@ -17,7 +17,6 @@ class Controller extends BaseController
     public function index() {
 
         $featuredProducts = Product::where('is_featured', 'Yes')->where('status', 1)->get();
-
         $data['featuredProducts'] = $featuredProducts;
 
         return view('frontend.index', $data);

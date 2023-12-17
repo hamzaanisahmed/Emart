@@ -75,8 +75,21 @@
     });
 
 
+    // Orders.
     //Date-Picker.
     $('#shipped_date').datetimepicker({
+        // options here
+        format:'Y-m-d H:i:s',
+    });
+
+    // Discount Coupouns.
+    $('#starts_at').datetimepicker({
+        // options here
+        format:'Y-m-d H:i:s',
+    });
+
+
+    $('#expires_at').datetimepicker({
         // options here
         format:'Y-m-d H:i:s',
     });

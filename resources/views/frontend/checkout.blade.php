@@ -100,13 +100,19 @@
                     @endforeach
                     <li class="border-bottom my-2"></li>
                     <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">SubTotal</strong><span class="fw-bold text-muted">{{ Cart::subtotal() }}</span></li>
+                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal" id="disount">Discount</strong><span class="fw-bold text-muted">{{ $discount }}</span></li>
                     <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">Shipping Charges</strong><span class="fw-bold text-muted">{{ number_format($totalShippingCharge) }}</span></li>
                     <li class="border-bottom my-2"></li>
                     <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Total</strong><span class="fw-bold">Rs. {{ number_format($grandTotal) }}</span></li>
                   </ul>
                 </div>
               </div>
-              <br>
+              {{-- <br> --}}
+              <div class="input-group apply-coupan mt-4 mb-4">
+                <input type="text" class="form-control" name="couponCode" id="couponCode" placeholder="Coupon Code" >
+                <button class="btn btn-dark" type="button" id="couponCodeBtn">Apply Coupon</button>
+            </div> 
+              {{-- <br> --}}
             <!-- Payment Method-->
                 <div class="card border-0 rounded-0 p-lg-4 bg-light">
                     <div class="card-body">
@@ -216,6 +222,23 @@
         });
     });
 
+
+    $(document).on('click', '#couponCodeBtn', function (event){
+      event.preventDefault();
+
+      $.ajax({
+        url: "{{ route('applyDiscountCoupons') }}",
+        type: "post",
+        data: {code: $("#couponCode").val(), country_id: $("#country").val()},
+        dataType: "json",
+        success: function (response) {
+          if(response.status == true) {
+          // $("#disount").html(response.discount);
+          }
+        }
+      });
+      
+    }); //couponCodeBtn.
 </script>
 @endsection
 

@@ -19,6 +19,11 @@ class shopController extends Controller
         $brands = Brands::orderBy('name', 'ASC')->where('status',1)->get();
         $products = Product::where('status', 1);
 
+        if(!empty($categorySlug)) {
+            $category = Category::where('slug', $categorySlug)->first();
+            $products = $products->where('category_id', $category->id);
+        }
+
         if(!empty($subcategorySlug)) {
             $subcategory = SubCategory::where('slug', $subcategorySlug)->first();
             $products = $products->where('sub_category_id', $subcategory->id);
@@ -70,8 +75,6 @@ class shopController extends Controller
             abort(404);
 
         }
-
-
 
         $relatedProducts = [];
 

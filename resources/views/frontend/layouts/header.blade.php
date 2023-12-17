@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Emart | Ecommerce Website</title>
+    <title>Emart | Ecommerce</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -40,10 +40,8 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('home') }}">Home</a>
                     </li>
-
                     @if (getCategories()->isNotEmpty())
                     @foreach (getCategories() as $category)
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $category->name }}</a>
                         @if ($category->subcategory->isNotEmpty())
@@ -57,22 +55,20 @@
                         </div>
                         @endif
                     </li>
-
                     @endforeach
                     @endif
-
                 </ul>
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('cart') }}"> <i class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small class="text-dark fw-bold"> ( {{ Cart::count() }} ) </small></a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('user.profile') }}"> <i class="far fa-heart me-1"></i><small class="text-gray fw-normal"> (0)</small></a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('user.login') }}">
-
                    <i class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li>
-
               </ul>
             </div>
           </nav>
         </div>
       </header>
+
+      
 
 

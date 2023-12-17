@@ -6,7 +6,6 @@
 
 
 {{-- Add Brands Modal --}}
-
 <div class="modal fade" id="addBrandsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -42,13 +41,10 @@
       </div>
     </div>
 </div>
-
 {{-- End- Add Brands Modal --}}
 
-
-  {{-- Edit & Update Brands Modal --}}
-
-  <div class="modal fade" id="editBrandsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- Edit & Update Brands Modal --}}
+<div class="modal fade" id="editBrandsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -83,14 +79,11 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+{{-- End - Edit & Update Brands Modal --}}
 
-  {{-- End - Edit & Update Brands Modal --}}
-
-
-  {{-- Delete Modal --}}
-
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- Delete Modal --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -101,7 +94,7 @@
         </div>
         <div class="modal-body">
             <input type="hidden" id="deleteId">
-            <h3>Are you sure ? You want to delete this ?</h3>
+            <label for="">Are you sure? You want to delete this brand?</label>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -109,9 +102,8 @@
         </div>
       </div>
     </div>
-  </div>
-
-  {{-- End - Delete Modal --}}
+</div>
+{{-- End - Delete Modal --}}
 
 
 <!-- wrapper  -->
@@ -418,7 +410,7 @@
 
             $.ajax({
 
-                url: "/brands",
+                url: "{{ route('brands.store') }}",
                 type: "POST",
                 data: data,
                 dataType: "json",

@@ -34,7 +34,7 @@ class ProductImageController extends Controller
 
         $desPath = public_path().'/uploads/products/large/'.$productImageName;
         $image = Image::make($sourcePath);
-        $image->resize(1400, null, function ($constraint) {
+        $image->resize(1400, 1568, function ($constraint) {
             $constraint->aspectRatio();
         });
 

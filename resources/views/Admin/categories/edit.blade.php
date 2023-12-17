@@ -46,7 +46,7 @@
 
                         {{-- // Current Image Here --}}
                         <div class="col">
-                            <label for="Current-Image" class="col-form-label">Current Image:</label>
+                            <label for="currentImage" class="col-form-label">Current Image:</label>
                             <div id="currentImage" class="current">
                             </div>
                         </div>
@@ -158,7 +158,7 @@
 
             $.ajax({
 
-                url: "{{ url('category/update') }}/" + categoryId,
+                url: "{{ route('category.update', '') }}/" + categoryId,
                 type: 'PUT',
                 data: formData,
                 success: function(response) {
@@ -297,8 +297,6 @@
             let categoryId = $(this).val();
             let newUrl = url.replace('ID', categoryId);
 
-            // alert(newUrl);
-            // return false;
             if(confirm("Are You Sure ? You Want To Delete This Category")) {
 
             $.ajax({

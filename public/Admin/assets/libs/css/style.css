@@ -7232,7 +7232,7 @@ Media Query
 }
 
 .image-4 img {
-    width: 185px;
+    width: 125px;
     height: auto;
     border-radius: 20px;
 
@@ -7240,7 +7240,7 @@ Media Query
 
 .image-5 img,
 .image-6 img {
-    width: 185px;
+    width: 125px;
     height: auto;
     border-radius: 20px;
 }
@@ -7287,6 +7287,13 @@ Media Query
 
 /* // End */
 /* Add more CSS rules for other images as needed */
+
+
+.BRR {
+
+    border-radius: 100%;
+
+}
 
 
 

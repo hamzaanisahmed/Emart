@@ -132,10 +132,10 @@
                                         <div class="mb-3">
                                             <label for="" style="font-size: 20px">Shipped Date</label>
                                             @if (!empty($order->shipped_date))
-                                            <input type="text" class="form-control" name="shipped_date" id="shipped_date" 
+                                            <input autocomplete="off" type="text" class="form-control" name="shipped_date" id="shipped_date" 
                                                 value="{{ \Carbon\Carbon::parse($order->shipped_date)->format('d-m-Y H:i:s') }}" placeholder="Select Shipping Date">
                                             @else
-                                            <input type="text" class="form-control" name="shipped_date" id="shipped_date" placeholder="Select Shipping Date">
+                                            <input autocomplete="off" type="text" class="form-control" name="shipped_date" id="shipped_date" placeholder="Select Shipping Date">
                                             @endif
                                         </div>
                                         <div class="mb-3">

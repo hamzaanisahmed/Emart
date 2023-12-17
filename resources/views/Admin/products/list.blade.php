@@ -159,9 +159,7 @@
         $(document).on('click', '#newProductButton', function() {
 
             $("#preloader").removeClass('d-none');
-
-            let newUrl = '/products/create';
-
+            let newUrl = '{{ route("product.create") }}';
             window.history.pushState('', '', newUrl);
 
             $.ajax({
@@ -169,11 +167,8 @@
                 url: newUrl,
                 type: 'GET',
                 success:function (data) {
-
                     $('body').html(data);
-
                     $("#preloader").addClass('d-none');
-
 
                 }
             }); // ajax.
@@ -185,17 +180,14 @@
         $(document).on('click', '.edit-btn', function () {
 
             $('#preloader').removeClass('d-none');
-
             let editId = $(this).val();
             let newUrl = "{{ route('product.edit', '') }}/" + editId;
-
             window.history.pushState('', '', newUrl);
 
             $.ajax({
                 type: "GET",
                 url: newUrl,
                 success: function (data) {
-
                     $('body').html(data);
                     $("#preloader").addClass('d-none');
 
@@ -215,7 +207,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "Do you want to delete this product?",
+                text: "You want to delete this product?",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -249,7 +241,6 @@
         $("#searchInput").on("keyup",function() {
 
             let search = $(this).val().toLowerCase();
-
             $("#productsTable tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(search) >-1 );
 

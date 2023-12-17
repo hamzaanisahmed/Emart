@@ -143,7 +143,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="shippingTable">
-                                       
                                     </tbody>
                                     <tfoot>
                                         <tr>
