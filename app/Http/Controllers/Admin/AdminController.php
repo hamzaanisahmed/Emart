@@ -38,7 +38,6 @@ class AdminController extends Controller
                     
                     return redirect()->route('admin.login')->with('error',
                         'You Are Not Authorized To Access Admin Panel');
-
                 }
 
         } else {

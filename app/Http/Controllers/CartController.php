@@ -91,12 +91,14 @@ class CartController extends Controller
             if ($qty <= $product->qty) {
                 Cart::update($rowId, $qty); // Will update the quantity
 
+                // $subtotal = Cart::get($rowId)->subtotal('0', '', '');
+
                 $status = true;
-                // $total = Cart::update($rowId, $qty)->subtotal();
                 $message = 'Cart Updated Successfully';
 
             } else {
                 $status = false;
+                // $subtotal = Cart::subtotal();
                 $message = 'Requested Quantity ('.$qty.') not available in stock';
             }
         }
@@ -104,7 +106,8 @@ class CartController extends Controller
         // Cart::update($rowId, $qty); // Will update the quantity
         return response()->json([
             'status' => $status,
-            // 'total' => Cart::update($rowId, $qty)->subtotal(),
+            // 'subtotal' => Cart::subtotal(0,'', ','),
+            // 'total' => $subtotal,
             'message' => $message
         ]);
     }

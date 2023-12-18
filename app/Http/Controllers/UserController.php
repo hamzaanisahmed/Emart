@@ -48,12 +48,13 @@ class UserController extends Controller
         }
     }
 
+    // User Register form create
     public function register() {
 
         return view('frontend.user.register');
     }
 
-
+    // User Register form store
     public function processRegister(Request $request) {
 
         $validator = Validator::make($request->all(), [
@@ -114,7 +115,6 @@ class UserController extends Controller
     }
 
 
-
     public function orderDetails($id) {
         $user = Auth::user();
         $order = orders::where('user_id', $user->id)->where('id', $id)->first();
@@ -125,4 +125,87 @@ class UserController extends Controller
 
         return view('frontend.user.orderDetails', $data);
     }
+
+    // fetch all user details for Admin Dashboard.
+    public function userCreate() {
+        return view('Admin.users.create');
+    }
+
+
+    public function userStore(Request $request) {
+
+        return $this->processRegister($request);
+    }
+
+
+    //List.
+    public function users() {
+
+        $users = User::latest()->paginate(10);
+        return view('Admin.users.list', compact('users'));
+    }
+
+
+    public function userEdit($id) {
+
+        $user = User::find($id);
+        return view('Admin.users.edit', compact('user'));
+    }
+
+    public function userUpdate(Request $request, $id) {
+
+        $user = User::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$user->id.'id',
+            'phone_number' => 'required|max:11',
+            'password' => 'required|min:5|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        if ($validator->passes()) {
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone_number;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Update Successfully'
+            ]);
+
+        } else {
+
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors(),
+            ]);
+        }
+    }
+
+
+    public function userDelete($id) {
+
+        $user = User::find($id);
+        
+        if (!empty($user)) {
+
+            $user->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Deleted Successfully',
+            ]);
+            
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'User Not found',
+            ]);           
+        }
+    }
+    
 }

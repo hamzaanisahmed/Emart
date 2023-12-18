@@ -60,7 +60,7 @@
                                     <span class="badge badge-pill badge-danger">Cancelled</span>          
                                     @endif
                                 </td>
-                                <td>{{ number_format($order->grand_total) }}</td>
+                                <td>Rs. {{ number_format($order->grand_total) }}</td>
                                 <td>{{ $order->created_at->format('d-m-Y') }}</td>                            
                             </tr>
                             @endforeach

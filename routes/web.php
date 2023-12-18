@@ -40,7 +40,7 @@ Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCa
 Route::post('/update-cart', [CartController::class, 'updateCart'])->name('updateCart'); // Product Update-cart.
 Route::post('/delete-cart', [CartController::class, 'destroyCart'])->name('deleteCart'); // Delete-cart.
 Route::get('/cart', [CartController::class, 'cart'])->name('cart'); // Product Cart Page.
-Route::post('/applyDiscountCoupons', [CartController::class, 'applyDiscountCoupons'])->name('applyDiscountCoupons');
+Route::post('/applyDiscountCoupons', [CartController::class, 'applyDiscountCoupons'])->name('applyDiscountCoupons'); // To Be Continued....
 
 // Users Middleware. 
 Route::group(['prefix' => '/user'], function () {
@@ -158,6 +158,14 @@ Route::group(['prefix' => '/admin'], function() {
         Route::get('/discountCouponsEdit/{id}', [DiscountCouponsController::class, 'edit'])->name('discountCouponsEdit');
         Route::put('/discountCouponsUpdate/{id}', [DiscountCouponsController::class, 'update'])->name('discountCouponsUpdate');
         Route::delete('/discountCouponsDelete/{id}', [DiscountCouponsController::class, 'destroy'])->name('discountCouponsDelete');
+
+        // Users.
+        Route::get('/userCreate', [UserController::class, 'userCreate'])->name('userCreate');
+        Route::post('/userStore', [UserController::class, 'userStore'])->name('userStore');
+        Route::get('/users', [UserController::class, 'users'])->name('users');
+        Route::get('/userEdit/{id}', [UserController::class, 'userEdit'])->name('userEdit');
+        Route::put('/userUpdate/{id}', [UserController::class, 'userUpdate'])->name('userUpdate');
+        Route::delete('/userDelete/{id}', [UserController::class, 'userDelete'])->name('userDelete');
         
         // Logout.
         Route::get('/logout', [DashboardController::class, 'logout'])->name('admin.logout');

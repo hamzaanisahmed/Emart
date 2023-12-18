@@ -95,7 +95,7 @@
                     <li class="d-flex align-items-center justify-content-between mb-3"><strong class="small fw-normal">{{ $item->name }} x {{ $item->qty }}</strong><span class="text-muted small fw-bold">Rs. {{ $item->price }}</span></li>
                     @endforeach
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">SubTotal</strong><span class="fw-bold text-muted">{{ Cart::subtotal() }}</span></li>
+                    <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">SubTotal</strong><span class="fw-bold text-muted" id="subtotal">{{ Cart::subtotal() }}</span></li>
                     {{-- <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">Discount</strong><span class="fw-bold text-muted"></span></li>
                     <li class="d-flex align-items-center justify-content-between mb-2"><strong class="text-uppercase small fw-normal">Shipping Charges</strong><span class="fw-bold text-muted"></span></li>
                     <li class="border-bottom my-2"></li>
@@ -165,6 +165,7 @@ function updateCart(rowId,qty) {
             if (response.status == true) {
                 location.reload();
                 // $("#total").html(response.total).val();
+                // $("#subtotal").html(response.subtotal).val();
 
             } else {
                 alert(response.message);
